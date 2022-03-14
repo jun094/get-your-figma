@@ -17,6 +17,8 @@ const Home: NextPage = () => {
         });
         const content = await rawResponse.json();
 
+        console.log(process.env.GOOGLE_CLIENT_EMAIL, process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'));
+        console.log('res', content);
         // print to screen
         alert(content.data.tableRange);
     };
