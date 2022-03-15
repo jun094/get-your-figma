@@ -5,21 +5,23 @@ const Home: NextPage = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const form = { node_id: 'A', name: 'B', ko: 'C', en: 'D', ja: 'E' };
+        try {
+            const form = { node_id: 'A', name: 'B', ko: 'C', en: 'D', ja: 'E' };
 
-        const rawResponse = await fetch('/api/submit', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form),
-        });
-        const content = await rawResponse.json();
+            const rawResponse = await fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+            const content = await rawResponse.json();
 
-        console.log('res', content);
-        // print to screen
-        alert(content.data.tableRange);
+            console.log('res', rawResponse);
+        } catch (err: any) {
+            console.error(err);
+        }
     };
 
     return (
