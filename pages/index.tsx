@@ -2,8 +2,12 @@ import type { NextPage } from 'next';
 import { FormEvent, useState } from 'react';
 
 const Home: NextPage = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setIsLoading(true);
 
         try {
             const form = { node_id: 'A', name: 'B', ko: 'C', en: 'D', ja: 'E' };
@@ -20,8 +24,10 @@ const Home: NextPage = () => {
 
             console.log('content', content);
         } catch (err: any) {
-            console.log(err);
+            console.error(err);
         }
+
+        setIsLoading(false);
     };
 
     return (
@@ -29,12 +35,16 @@ const Home: NextPage = () => {
             <h1>submit spread sheet : )</h1>
             <form className="py-4 space-y-4" onSubmit={handleSubmit}>
                 <div className="flex items-center justify-center">
-                    <button
-                        type="submit"
-                        className="flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600"
-                    >
-                        Save
-                    </button>
+                    {isLoading ? (
+                        <h1>loading...</h1>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600"
+                        >
+                            Save
+                        </button>
+                    )}
                 </div>
             </form>
         </main>
