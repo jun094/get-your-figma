@@ -18,9 +18,9 @@ const Home: NextPage = () => {
             });
             const content = await rawResponse.json();
 
-            console.log('res', rawResponse);
+            console.log('res', content);
         } catch (err: any) {
-            console.error(err);
+            console.log(err);
         }
     };
 

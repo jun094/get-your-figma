@@ -11,43 +11,40 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(body);
 
     try {
-        const auth = new google.auth.GoogleAuth({
-            credentials: {
-                client_email: process.env.GOOGLE_CLIENT_EMAIL,
-                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-            },
-            scopes: [
-                'https://www.googleapis.com/auth/drive',
-                'https://www.googleapis.com/auth/drive.file',
-                'https://www.googleapis.com/auth/spreadsheets',
-            ],
-        });
+        // const auth = new google.auth.GoogleAuth({
+        //     credentials: {
+        //         client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        //         private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        //     },
+        //     scopes: [
+        //         'https://www.googleapis.com/auth/drive',
+        //         'https://www.googleapis.com/auth/drive.file',
+        //         'https://www.googleapis.com/auth/spreadsheets',
+        //     ],
+        // });
 
-        const sheets = google.sheets({
-            auth,
-            version: 'v4',
-        });
+        // const sheets = google.sheets({
+        //     auth,
+        //     version: 'v4',
+        // });
 
-        const response = await sheets.spreadsheets.values.append({
-            spreadsheetId: process.env.GOOGLE_SHEET_ID,
-            range: 'A1:E1',
-            valueInputOption: 'USER_ENTERED',
-            requestBody: {
-                values: [[body.node_id, body.name, body.ko, body.en, body.ja]],
-            },
-        });
+        // const response = await sheets.spreadsheets.values.append({
+        //     spreadsheetId: process.env.GOOGLE_SHEET_ID,
+        //     range: 'A1:E1',
+        //     valueInputOption: 'USER_ENTERED',
+        //     requestBody: {
+        //         values: [[body.node_id, body.name, body.ko, body.en, body.ja]],
+        //     },
+        // });
 
-        console.log('response', response);
+        // console.log('response', response);
 
         return res.status(201).json({
-            data: response.data,
+            data: process.env,
         });
-    } catch (err: any) {
-        return {
-            message: `에러메세지: (${err.message}) ${{
-                client_email: process.env.GOOGLE_CLIENT_EMAIL,
-                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-            }}`,
-        };
+    } catch (e: any) {
+        return res.status(e.code).send({
+            message: 'asdfasdfasdf',
+        });
     }
 }
