@@ -8,8 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const body = req.body;
 
-    console.log(body);
-
     try {
         const auth = new google.auth.GoogleAuth({
             credentials: {
@@ -40,11 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(201).json({
             data: response.data,
         });
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            return {
-                message: `에러메세지: (${err.message})`,
-            };
-        }
+    } catch (e: any) {
+        return res.status(e.code).send({
+            message: e.message,
+        });
     }
 }
