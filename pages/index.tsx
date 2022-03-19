@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import Result from 'src/components/Result'
 import { getDocument } from 'src/utils/figma'
 
-import auth from 'auth.json'
+// import auth from 'auth.json'
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -15,9 +15,9 @@ const Home: NextPage = () => {
   })
   const [activeState, setActiveState] = useState('')
 
-  const [figmaToken, setFigmaToken] = useState(auth.FIGMA_TOKEN)
-  const [figmaFileKey, setFigmaFileKey] = useState(auth.FIGMA_FILE_KEY)
-  const [figmaNodeId, setFigmaNodeId] = useState(auth.FIGMA_NODE_ID)
+  const [figmaToken, setFigmaToken] = useState('')
+  const [figmaFileKey, setFigmaFileKey] = useState('')
+  const [figmaNodeId, setFigmaNodeId] = useState('')
 
   const handleInput = e => {
     const { value, id } = e.target
