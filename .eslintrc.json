@@ -13,7 +13,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [ "prettier"],
+  "plugins": ["prettier"],
   "ignorePatterns": ["dist/", "node_modules/"],
   "rules": { "prettier/prettier": "error" }
 }
