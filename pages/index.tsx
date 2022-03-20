@@ -13,13 +13,13 @@ const Home: NextPage = () => {
     status: 0,
     data: {},
   })
-  const [activeState, setActiveState] = useState('')
+  //const [activeState, setActiveState] = useState('')
 
   const [figmaToken, setFigmaToken] = useState('')
   const [figmaFileKey, setFigmaFileKey] = useState('')
   const [figmaNodeId, setFigmaNodeId] = useState('')
 
-  const handleInput = e => {
+  const handleInput = (e: any) => {
     const { value, id } = e.target
 
     if (id === 'figmaToken') return setFigmaToken(value)
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     setFigmaNodeId(value)
   }
 
-  const handleClick = async e => {
+  const handleClick = async () => {
     setIsLoading(true)
 
     try {
