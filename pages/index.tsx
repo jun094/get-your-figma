@@ -39,8 +39,6 @@ const Home: NextPage = () => {
       })
     } catch (err: any) {
       const { response } = err
-
-      console.log(response)
       setRes({
         status: response.status,
         data: response.data,
