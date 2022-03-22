@@ -1,22 +1,27 @@
 import React, { FunctionComponent } from 'react'
 
-type ResultProps = {}
+type ResultProps = {
+  res: any
+}
+type DataType = {
+  data: any
+}
 
-const CutomConsole: FunctionComponent = function ({}) {
+const CutomConsole: FunctionComponent = function () {
   console.log(
     '%c=============\nGet.\nYour.\nFigma:)\n=============\n',
     'color:white; font-size:25px; background:black',
   )
   return <></>
 }
-const Intro: FunctionComponent = function ({ data }) {
+const Intro: FunctionComponent = function () {
   return <CutomConsole />
 }
-const Success: FunctionComponent = function ({ data }) {
+const Success: FunctionComponent<DataType> = function ({ data }) {
   console.log(data)
   return <h1>Success :) Check your console ! </h1>
 }
-const Fail: FunctionComponent = function ({ data }) {
+const Fail: FunctionComponent<DataType> = function ({ data }) {
   console.log(data)
 
   return <h1>Fail :( Check your console ! </h1>
