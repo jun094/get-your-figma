@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { NextPage } from 'next'
 
 import Result from 'src/components/Result'
+import Button from '../src/components/Button'
 import { getDocument } from 'src/utils/figma'
 
 // import auth from 'auth.json'
@@ -82,12 +83,20 @@ const Home: NextPage = () => {
         <h3>loading...</h3>
       ) : (
         <>
-          <button
-            className="flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600"
-            onClick={handleClick}
-          >
-            get figma !
-          </button>
+          <div className="flex">
+            <Button className="mr-2" onClick={handleClick}>
+              Get Documnet
+            </Button>
+            <Button className="mr-2" onClick={handleClick}>
+              Get Component
+            </Button>
+            <Button className="mr-2" onClick={handleClick}>
+              Get Text
+            </Button>
+            <Button className="mr-2" onClick={handleClick}>
+              Get Svg
+            </Button>
+          </div>
 
           <Result res={res} />
         </>
