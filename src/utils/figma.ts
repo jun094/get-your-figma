@@ -15,7 +15,7 @@ export const getFiles = async (token, fileKey, nodeId) => {
   return res
 }
 
-export const getComponents = async (token, fileKey, nodeId) => {
+export const getChildren = async (token, fileKey, nodeId) => {
   const id = decodeURIComponent(nodeId)
   const {
     data: { nodes },
@@ -26,20 +26,50 @@ export const getComponents = async (token, fileKey, nodeId) => {
   }
 }
 
-export const getTextData = async (token, fileKey, nodeId) => {
-  const componets = await getComponents(token, fileKey, nodeId)
+export const getComponents = async (token, fileKey, nodeId) => {
+  const { satus, data } = await getChildren(token, fileKey, nodeId)
 
-  const obj = componets.map(component => {
+  if (satus !== 200)
     return {
-      status: 200,
-      data: {
-        asdf: 'asdf',
-      },
+      satus: 500,
+      data: null,
     }
-  })
 
   return {
     satus: 200,
-    data: obj,
+    data: data
+      .filter(component => component.type === 'COMPONENT')
+      .map(component => {
+        return {
+          id: component.id,
+          type: component.type,
+          characters: component.characters,
+          name: component.name,
+        }
+      }),
+  }
+}
+
+export const getTextData = async (token, fileKey, nodeId) => {
+  const { satus, data } = await getChildren(token, fileKey, nodeId)
+
+  if (satus !== 200)
+    return {
+      satus: 500,
+      data: null,
+    }
+
+  return {
+    satus: 200,
+    data: data
+      .filter(text => text.type === 'TEXT')
+      .map(text => {
+        return {
+          id: text.id,
+          type: text.type,
+          characters: text.characters,
+          name: text.name,
+        }
+      }),
   }
 }

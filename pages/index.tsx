@@ -3,7 +3,12 @@ import type { NextPage } from 'next'
 
 import Result from 'src/components/Result'
 import Button from '../src/components/Button'
-import { getFiles, getComponents, getTextData } from 'src/utils/figma'
+import {
+  getFiles,
+  getChildren,
+  getComponents,
+  getTextData,
+} from 'src/utils/figma'
 
 const FIGMA_TOKEN = process?.env.NEXT_PUBLIC_FIGMA_TOKEN || ''
 const FIGMA_FILE_KEY = process?.env.NEXT_PUBLIC_FIGMA_FILE_KEY || ''
@@ -35,19 +40,16 @@ const Home: NextPage = () => {
     setIsLoading(true)
 
     try {
-      let res
-
-      if (id === 'files') {
-        res = await getFiles(figmaToken, figmaFileKey, figmaNodeId)
-      } else if (id === 'component') {
-        res = await getComponents(figmaToken, figmaFileKey, figmaNodeId)
-      } else if (id === 'text') {
-        res = await getTextData(figmaToken, figmaFileKey, figmaNodeId)
-      } else {
-        res = await getTextData(figmaToken, figmaFileKey, figmaNodeId)
+      const getDatas = {
+        files: getFiles,
+        children: getChildren,
+        component: getComponents,
+        text: getTextData,
+        svg: getTextData,
       }
 
-      console.log(res)
+      const res = await getDatas[id](figmaToken, figmaFileKey, figmaNodeId)
+
       setRes({
         status: res.status,
         data: res.data,
@@ -97,17 +99,20 @@ const Home: NextPage = () => {
         <h3>loading...</h3>
       ) : (
         <>
-          <div className="flex">
-            <Button id="files" className="mr-2" onClick={handleClick}>
+          <div className="flex flex-col">
+            <Button id="files" className="mr-2 mt-1" onClick={handleClick}>
               Get Files
             </Button>
-            <Button id="component" className="mr-2" onClick={handleClick}>
+            <Button id="children" className="mr-2 mt-1" onClick={handleClick}>
+              Get Children
+            </Button>
+            <Button id="component" className="mr-2 mt-1" onClick={handleClick}>
               Get Component
             </Button>
-            <Button id="text" className="mr-2" onClick={handleClick}>
+            <Button id="text" className="mr-2 mt-1" onClick={handleClick}>
               Get Text
             </Button>
-            <Button id="svg" className="mr-2" onClick={handleClick}>
+            <Button id="svg" className="mr-2 mt-1" onClick={handleClick}>
               Get Svg
             </Button>
           </div>
