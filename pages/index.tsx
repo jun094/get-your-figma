@@ -2,22 +2,29 @@ import { useState } from 'react'
 import type { NextPage } from 'next'
 
 import Result from 'src/components/Result'
-import { getDocument } from 'src/utils/figma'
+import Button from '../src/components/Button'
+import {
+  getFiles,
+  getChildren,
+  getComponents,
+  getTextData,
+} from 'src/utils/figma'
 
-// import auth from 'auth.json'
+const FIGMA_TOKEN = process?.env.NEXT_PUBLIC_FIGMA_TOKEN || ''
+const FIGMA_FILE_KEY = process?.env.NEXT_PUBLIC_FIGMA_FILE_KEY || ''
+const FIGMA_NODE_ID = process?.env.NEXT_PUBLIC_FIGMA_NODE_ID || ''
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false)
-
   const [res, setRes] = useState({
     status: 0,
     data: {},
   })
   //const [activeState, setActiveState] = useState('')
 
-  const [figmaToken, setFigmaToken] = useState('')
-  const [figmaFileKey, setFigmaFileKey] = useState('')
-  const [figmaNodeId, setFigmaNodeId] = useState('')
+  const [figmaToken, setFigmaToken] = useState(FIGMA_TOKEN)
+  const [figmaFileKey, setFigmaFileKey] = useState(FIGMA_FILE_KEY)
+  const [figmaNodeId, setFigmaNodeId] = useState(FIGMA_NODE_ID)
 
   const handleInput = (e: any) => {
     const { value, id } = e.target
@@ -27,21 +34,31 @@ const Home: NextPage = () => {
     setFigmaNodeId(value)
   }
 
-  const handleClick = async () => {
+  const handleClick = async e => {
+    const { id } = e.target
+
     setIsLoading(true)
 
     try {
-      const response = await getDocument(figmaToken, figmaFileKey)
+      const getDatas = {
+        files: getFiles,
+        children: getChildren,
+        component: getComponents,
+        text: getTextData,
+        svg: getTextData,
+      }
+
+      const res = await getDatas[id](figmaToken, figmaFileKey, figmaNodeId)
 
       setRes({
-        status: response.status,
-        data: response.data,
+        status: res.status,
+        data: res.data,
       })
     } catch (err: any) {
-      const { response } = err
+      const { res } = err
       setRes({
-        status: response.status,
-        data: response.data,
+        status: res?.status,
+        data: res?.data,
       })
     }
 
@@ -82,12 +99,23 @@ const Home: NextPage = () => {
         <h3>loading...</h3>
       ) : (
         <>
-          <button
-            className="flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600"
-            onClick={handleClick}
-          >
-            get figma !
-          </button>
+          <div className="flex flex-col">
+            <Button id="files" className="mr-2 mt-1" onClick={handleClick}>
+              Get Files
+            </Button>
+            <Button id="children" className="mr-2 mt-1" onClick={handleClick}>
+              Get Children
+            </Button>
+            <Button id="component" className="mr-2 mt-1" onClick={handleClick}>
+              Get Component
+            </Button>
+            <Button id="text" className="mr-2 mt-1" onClick={handleClick}>
+              Get Text
+            </Button>
+            <Button id="svg" className="mr-2 mt-1" onClick={handleClick}>
+              Get Svg
+            </Button>
+          </div>
 
           <Result res={res} />
         </>

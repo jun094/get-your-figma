@@ -8,33 +8,68 @@ export const instanceFiles = (token, fileKey) =>
     },
   })
 
-export const getDocument = async (token, fileKey) => {
+export const getFiles = async (token, fileKey, nodeId) => {
   const res = await instanceFiles(token, fileKey).get(
-    `/nodes?ids=${decodeURIComponent('0%3A1')}`,
+    `/nodes?ids=${decodeURIComponent(nodeId)}`,
   )
   return res
 }
 
-export const getComponents = async (fileKey, nodeId) => {
+export const getChildren = async (token, fileKey, nodeId) => {
+  const id = decodeURIComponent(nodeId)
   const {
     data: { nodes },
-  } = await instanceFiles(fileKey).get(
-    `/nodes?ids=${decodeURIComponent(nodeId)}`,
-  )
-  return nodes[nodeId].document.children
+  } = await instanceFiles(token, fileKey).get(`/nodes?ids=${id}`)
+  return {
+    satus: 200,
+    data: nodes[id].document.children,
+  }
 }
 
-export const getTextData = async (fileKey, nodeId) => {
-  const componets = await getComponents(fileKey, nodeId)
+export const getComponents = async (token, fileKey, nodeId) => {
+  const { satus, data } = await getChildren(token, fileKey, nodeId)
 
-  return componets.map(comp => {
+  if (satus !== 200)
     return {
-      id: comp.id,
-      name: comp.name,
-      ko:
-        comp.children[0].type === 'TEXT'
-          ? comp.children[0].name
-          : '유효하지 않은 타입',
+      satus: 500,
+      data: null,
     }
-  })
+
+  return {
+    satus: 200,
+    data: data
+      .filter(component => component.type === 'COMPONENT')
+      .map(component => {
+        return {
+          id: component.id,
+          type: component.type,
+          characters: component.characters,
+          name: component.name,
+        }
+      }),
+  }
+}
+
+export const getTextData = async (token, fileKey, nodeId) => {
+  const { satus, data } = await getChildren(token, fileKey, nodeId)
+
+  if (satus !== 200)
+    return {
+      satus: 500,
+      data: null,
+    }
+
+  return {
+    satus: 200,
+    data: data
+      .filter(text => text.type === 'TEXT')
+      .map(text => {
+        return {
+          id: text.id,
+          type: text.type,
+          characters: text.characters,
+          name: text.name,
+        }
+      }),
+  }
 }
