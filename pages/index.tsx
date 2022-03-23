@@ -5,20 +5,21 @@ import Result from 'src/components/Result'
 import Button from '../src/components/Button'
 import { getDocument } from 'src/utils/figma'
 
-// import auth from 'auth.json'
+const FIGMA_TOKEN = process?.env.NEXT_PUBLIC_FIGMA_TOKEN || ''
+const FIGMA_FILE_KEY = process?.env.NEXT_PUBLIC_FIGMA_FILE_KEY || ''
+const FIGMA_NODE_ID = process?.env.NEXT_PUBLIC_FIGMA_NODE_ID || ''
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false)
-
   const [res, setRes] = useState({
     status: 0,
     data: {},
   })
   //const [activeState, setActiveState] = useState('')
 
-  const [figmaToken, setFigmaToken] = useState('')
-  const [figmaFileKey, setFigmaFileKey] = useState('')
-  const [figmaNodeId, setFigmaNodeId] = useState('')
+  const [figmaToken, setFigmaToken] = useState(FIGMA_TOKEN)
+  const [figmaFileKey, setFigmaFileKey] = useState(FIGMA_FILE_KEY)
+  const [figmaNodeId, setFigmaNodeId] = useState(FIGMA_NODE_ID)
 
   const handleInput = (e: any) => {
     const { value, id } = e.target
