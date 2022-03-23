@@ -8,33 +8,38 @@ export const instanceFiles = (token, fileKey) =>
     },
   })
 
-export const getDocument = async (token, fileKey) => {
+export const getFiles = async (token, fileKey, nodeId) => {
   const res = await instanceFiles(token, fileKey).get(
-    `/nodes?ids=${decodeURIComponent('0%3A1')}`,
+    `/nodes?ids=${decodeURIComponent(nodeId)}`,
   )
   return res
 }
 
-export const getComponents = async (fileKey, nodeId) => {
+export const getComponents = async (token, fileKey, nodeId) => {
+  const id = decodeURIComponent(nodeId)
   const {
     data: { nodes },
-  } = await instanceFiles(fileKey).get(
-    `/nodes?ids=${decodeURIComponent(nodeId)}`,
-  )
-  return nodes[nodeId].document.children
+  } = await instanceFiles(token, fileKey).get(`/nodes?ids=${id}`)
+  return {
+    satus: 200,
+    data: nodes[id].document.children,
+  }
 }
 
-export const getTextData = async (fileKey, nodeId) => {
-  const componets = await getComponents(fileKey, nodeId)
+export const getTextData = async (token, fileKey, nodeId) => {
+  const componets = await getComponents(token, fileKey, nodeId)
 
-  return componets.map(comp => {
+  const obj = componets.map(component => {
     return {
-      id: comp.id,
-      name: comp.name,
-      ko:
-        comp.children[0].type === 'TEXT'
-          ? comp.children[0].name
-          : '유효하지 않은 타입',
+      status: 200,
+      data: {
+        asdf: 'asdf',
+      },
     }
   })
+
+  return {
+    satus: 200,
+    data: obj,
+  }
 }
