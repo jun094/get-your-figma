@@ -1,8 +1,16 @@
 import axios from 'axios'
 
-export const instanceFiles = (token, fileKey) =>
+const instanceFiles = (token, fileKey) =>
   axios.create({
     baseURL: `https://api.figma.com/v1/files/${fileKey}`,
+    headers: {
+      'X-FIGMA-TOKEN': token,
+    },
+  })
+
+const instanceImages = (token, fileKey) =>
+  axios.create({
+    baseURL: `https://api.figma.com/v1/images/${fileKey}`,
     headers: {
       'X-FIGMA-TOKEN': token,
     },
@@ -71,5 +79,32 @@ export const getTextData = async (token, fileKey, nodeId) => {
           name: text.name,
         }
       }),
+  }
+}
+
+export const getSvgData = async (token, fileKey, nodeId) => {
+  const { satus, data } = await getChildren(token, fileKey, nodeId)
+  const ids = data.map(item => item.id).join(',')
+
+  if (satus !== 200)
+    return {
+      satus: 500,
+      data: null,
+    }
+
+  const res = await instanceImages(token, fileKey).get(
+    `?ids=${ids}&format=svg&svg_include_id=false`,
+  )
+  const { images } = res.data
+
+  return {
+    status: 200,
+    data: data.map(item => {
+      return {
+        id: item.id,
+        name: item.name,
+        url: images[item.id],
+      }
+    }),
   }
 }

@@ -8,6 +8,7 @@ import {
   getChildren,
   getComponents,
   getTextData,
+  getSvgData,
 } from 'src/utils/figma'
 
 const FIGMA_TOKEN = process?.env.NEXT_PUBLIC_FIGMA_TOKEN || ''
@@ -45,7 +46,7 @@ const Home: NextPage = () => {
         children: getChildren,
         component: getComponents,
         text: getTextData,
-        svg: getTextData,
+        svg: getSvgData,
       }
 
       const res = await getDatas[id](figmaToken, figmaFileKey, figmaNodeId)
@@ -67,6 +68,10 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex items-center justify-center flex-col">
+      <h1 className="text-xl font-bold mb-3">
+        Get <br /> Your
+        <br /> Figma
+      </h1>
       <span className="flex mb-3">
         <label>token</label>
         <input
@@ -113,7 +118,7 @@ const Home: NextPage = () => {
               Get Text
             </Button>
             <Button id="svg" className="mr-2 mt-1" onClick={handleClick}>
-              Get Svg
+              Get SVG
             </Button>
           </div>
 
