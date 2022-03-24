@@ -8,6 +8,7 @@ import {
   getChildren,
   getComponents,
   getTextData,
+  getSvgData,
 } from 'src/utils/figma'
 
 const FIGMA_TOKEN = process?.env.NEXT_PUBLIC_FIGMA_TOKEN || ''
@@ -45,11 +46,12 @@ const Home: NextPage = () => {
         children: getChildren,
         component: getComponents,
         text: getTextData,
-        svg: getTextData,
+        svg: getSvgData,
       }
 
       const res = await getDatas[id](figmaToken, figmaFileKey, figmaNodeId)
 
+      console.log(res)
       setRes({
         status: res.status,
         data: res.data,
