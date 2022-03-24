@@ -68,6 +68,10 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex items-center justify-center flex-col">
+      <h1 className="text-xl font-bold mb-3">
+        Get <br /> Your
+        <br /> Figma
+      </h1>
       <span className="flex mb-3">
         <label>token</label>
         <input

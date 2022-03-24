@@ -19,12 +19,12 @@ const Intro: FunctionComponent = function () {
 }
 const Success: FunctionComponent<DataType> = function ({ data }) {
   console.log(data)
-  return <h1>Success :) Check your console ! </h1>
+  return <h1 className="text-xl mt-3">Success :) Check your console ! </h1>
 }
 const Fail: FunctionComponent<DataType> = function ({ data }) {
   console.log(data)
 
-  return <h1>Fail :( Check your console ! </h1>
+  return <h1 className="text-xl mt-3">Fail :( Check your console ! </h1>
 }
 
 const Result: FunctionComponent<ResultProps> = function ({ res }) {
