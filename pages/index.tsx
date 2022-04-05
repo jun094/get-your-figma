@@ -51,7 +51,6 @@ const Home: NextPage = () => {
 
       const res = await getDatas[id](figmaToken, figmaFileKey, figmaNodeId)
 
-      console.log(res)
       setRes({
         status: res.status,
         data: res.data,
@@ -69,6 +68,10 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex items-center justify-center flex-col">
+      <h1 className="text-xl font-bold mb-3">
+        Get <br /> Your
+        <br /> Figma
+      </h1>
       <span className="flex mb-3">
         <label>token</label>
         <input
@@ -115,7 +118,7 @@ const Home: NextPage = () => {
               Get Text
             </Button>
             <Button id="svg" className="mr-2 mt-1" onClick={handleClick}>
-              Get Svg
+              Get SVG
             </Button>
           </div>
 

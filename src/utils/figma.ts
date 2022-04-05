@@ -86,6 +86,12 @@ export const getSvgData = async (token, fileKey, nodeId) => {
   const { satus, data } = await getChildren(token, fileKey, nodeId)
   const ids = data.map(item => item.id).join(',')
 
+  if (satus !== 200)
+    return {
+      satus: 500,
+      data: null,
+    }
+
   const res = await instanceImages(token, fileKey).get(
     `?ids=${ids}&format=svg&svg_include_id=false`,
   )
@@ -93,7 +99,7 @@ export const getSvgData = async (token, fileKey, nodeId) => {
 
   return {
     status: 200,
-    datas: data.map(item => {
+    data: data.map(item => {
       return {
         id: item.id,
         name: item.name,
