@@ -13,10 +13,7 @@ function Button({ id, className, children, onClick }: ButtonProps) {
   return (
     <button
       id={id}
-      className={classNames(
-        className,
-        'flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600',
-      )}
+      className={classNames(className, 'btn btn-primary rounded-full')}
       onClick={onClick}
     >
       {children}
