@@ -1,34 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GET YOUR FIGMA
 
-## Getting Started
+**figma 파일의 데이터들을 json 데이터를 받을 수 있습니다.**
 
-First, run the development server:
+- 데이터를 받기위해서는 figma token값들이 필요합니다.
+- 받는 방법은 [링크](https://velog.io/@jun094/Figma-API%EB%A1%9C-storybook%EA%B3%BC-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%8F%99%EA%B8%B0%ED%99%94%EC%8B%9C%ED%82%A4%EA%B8%B0#step-1--figma-token-%EC%83%9D%EC%84%B1)를 참고해주세요.
+- 받은 데이터들은 개발자 도구 console 창에서 확인 가능합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![스크린샷 2022-07-15 오전 12 33 41](https://user-images.githubusercontent.com/42564107/179021002-a67acbbf-bb85-4c13-b88b-6a05fcc6f1af.png)
