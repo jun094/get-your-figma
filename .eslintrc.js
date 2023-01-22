@@ -25,6 +25,12 @@ module.exports = {
     'no-empty': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-console': ['error', { allow: ['warn', 'error'] }],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
   },
   settings: {
     react: {
