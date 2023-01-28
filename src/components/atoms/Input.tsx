@@ -1,9 +1,15 @@
-function Input() {
+type InputProps = {
+  value: string
+  placeholder?: string
+}
+
+function Input({ value, placeholder }: InputProps) {
   return (
     <input
       type="text"
-      placeholder="Type here"
-      className="input input-bordered w-full max-w-xs"
+      value={value}
+      placeholder={placeholder}
+      className="input input-bordered w-full"
     />
   )
 }
