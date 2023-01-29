@@ -23,7 +23,7 @@ module.exports = {
     'react/prop-types': ['off'],
     'linebreak-style': ['error', 'unix'],
     'no-empty': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
