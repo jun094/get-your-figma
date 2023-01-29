@@ -2,7 +2,6 @@ type TextareaProps = {
   value: any
 }
 function Textarea({ value }: TextareaProps) {
-  console.log(value)
   return (
     <textarea
       readOnly

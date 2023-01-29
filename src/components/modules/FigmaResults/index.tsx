@@ -1,12 +1,18 @@
-import Textarea from '@components/atoms/Textarea'
-import { useGetFigmaFile } from '@hooks/useFetchFigma'
+import Textarea from '_components/atoms/Textarea'
 
-type FigmaResultsProps = {
-  isGetData: boolean
-}
-function FigmaResults({ isGetData = false }: FigmaResultsProps) {
-  const { data } = useGetFigmaFile({ enabled: isGetData })
+import { useGetFigmaFile } from '_hooks/useFetchFigma'
+import { FigmaResultType } from '_types/figma'
 
+type FigmaResultsProps = FigmaResultType
+
+function FigmaResults({ token, fileKey, isEnabledResults }: FigmaResultsProps) {
+  const { data, isError } = useGetFigmaFile({
+    token,
+    fileKey,
+    isEnabledResults,
+  })
+
+  if (isError) return <h1>error:(</h1>
   return <Textarea value={JSON.stringify(data)} />
 }
 
