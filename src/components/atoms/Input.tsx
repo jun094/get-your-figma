@@ -1,4 +1,10 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, Ref } from 'react'
+import {
+  ChangeEvent,
+  FocusEvent,
+  forwardRef,
+  InputHTMLAttributes,
+  Ref,
+} from 'react'
 
 type InputProps = {
   name?: string
@@ -6,10 +12,11 @@ type InputProps = {
   placeholder?: string
   value?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>
 
 function Input(
-  { type = 'text', value, name, placeholder, onChange }: InputProps,
+  { type = 'text', value, name, placeholder, onChange, onFocus }: InputProps,
   ref: Ref<HTMLInputElement>,
 ) {
   return (
@@ -21,6 +28,7 @@ function Input(
       placeholder={placeholder}
       className="input input-bordered w-full"
       onChange={onChange}
+      onFocus={onFocus}
     />
   )
 }

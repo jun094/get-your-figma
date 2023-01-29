@@ -5,11 +5,10 @@ import { FigmaResultType } from '_types/figma'
 
 type FigmaResultsProps = FigmaResultType
 
-function FigmaResults({ token, fileKey, isEnabledResults }: FigmaResultsProps) {
+function FigmaResults({ token, fileKey }: FigmaResultsProps) {
   const { data, isError } = useGetFigmaFile({
     token,
     fileKey,
-    isEnabledResults,
   })
 
   if (isError) return <h1>error:(</h1>
