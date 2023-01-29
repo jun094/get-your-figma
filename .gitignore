@@ -39,3 +39,6 @@ auth.json
 
 # typescript
 next-env.d.ts
+
+# legacy
+_legacy
