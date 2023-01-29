@@ -5,7 +5,6 @@ type ButtonProps = {
   id?: string
   className?: string
   children: ReactNode
-
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 

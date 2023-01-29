@@ -6,9 +6,9 @@ import Top from '_components/atoms/Top'
 import PageWrapper from '_components/modules/PageWrapper'
 import Stack from '_components/atoms/Stack'
 import Toast from '_components/atoms/Toast'
+import SSRJsonViewrLoading from '_components/atoms/SSRJsonViewer/loading'
 
 import FigmaResults from '_components/modules/FigmaResults'
-import FigmaResultsLoading from '_components/modules/FigmaResults/loading'
 
 import { validFigmaFileKey, extractFigmaFileKey } from '_utils/index'
 
@@ -63,7 +63,7 @@ function HomePage() {
           <Button onClick={handleClickButton}>Get Your Figma !</Button>
 
           {isShowResult && (
-            <Suspense fallback={<FigmaResultsLoading />}>
+            <Suspense fallback={<SSRJsonViewrLoading />}>
               <FigmaResults token={tokenValue} fileKey={fileKey} />
             </Suspense>
           )}

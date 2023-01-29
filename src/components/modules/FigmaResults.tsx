@@ -1,4 +1,4 @@
-import Textarea from '_components/atoms/Textarea'
+import SSRJsonViewer from '_components/atoms/SSRJsonViewer'
 
 import { useGetFigmaFile } from '_hooks/useFetchFigma'
 import { FigmaResultType } from '_types/figma'
@@ -12,7 +12,7 @@ function FigmaResults({ token, fileKey }: FigmaResultsProps) {
   })
 
   if (isError) return <h1>error:(</h1>
-  return <Textarea value={JSON.stringify(data)} />
+  return <SSRJsonViewer data={data} />
 }
 
 export default FigmaResults
