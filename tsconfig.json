@@ -1,24 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "allowJs": true,
-    "jsx": "preserve",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
     "baseUrl": ".",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "paths": {
+      "_components/*": ["src/components/*"],
+      "_constants/*": ["src/constants/*"],
+      "_hooks/*": ["src/hooks/*"],
+      "_pages/*": ["src/pages/*"],
+      "_types/*": ["src/types/*"],
+      "_utils/*": ["src/utils/*"]
+    },
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "node",
-    "isolatedModules": true
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/api/figma.js"],
   "exclude": ["node_modules"]
 }
